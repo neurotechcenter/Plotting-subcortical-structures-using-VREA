@@ -1,0 +1,6 @@
+  <Component Type=“LabelVolume2Surface”>
+     <Name>“Generate ASEG+APARC Model”</Name>
+      <VolumeIdentifier>“ASEG”</VolumeIdentifier>
+      <SurfaceIdentifier>“LimbicSystem”</SurfaceIdentifier>
+      <Smoothing>3</Smoothing>
+  </Component>

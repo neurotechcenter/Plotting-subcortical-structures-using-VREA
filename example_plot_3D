@@ -1,0 +1,23 @@
+targets= find(cellfun(@(x)any(strcmp(x,{'Right-CM','Right-Pf','Right-MDm'})),{cmn_data.annotation.AnnotationLabel.Name}));
+targetids=[cmn_data.annotation.AnnotationLabel(targets).Identifier];
+subsetcortex.vert=[];
+subsetcortex.tri=[];
+for i=1:length(targetids)
+    triang=cmn_data.cortex.tri(any(cmn_data.cortex.triId == targetids(i),2),:);
+    subsetcortex.tri=[subsetcortex.tri; triang-min(triang(:))+1+size(subsetcortex.vert,1)];
+    subsetcortex.vert=[subsetcortex.vert; cmn_data.cortex.vert(any(cmn_data.cortex.vertId == targetids(i),2),:)];
+end
+
+subannotations.Annotation=cmn_data.annotation.Annotation(any(cmn_data.annotation.Annotation == targetids,2));
+subannotations.AnnotationLabel=cmn_data.annotation.AnnotationLabel(targets);
+%figure('color','white');
+hold on;
+[annot_remap,cmap,name]=createColormapFromAnnotations(subannotations);
+cmap(1,:)=[1 160 198]/255;
+cmap(2,:)=[193 180 154]/255;
+cmap(3,:)=[214 224 35]/255;
+%cmap(3,:)=[214 0 35]/255;
+%cmap(4:6,:)=cmap(1:3,:);
+plot3DModel(gca,subsetcortex,annot_remap,'FaceAlpha',0.3);
+colormap(cmap);
+hold on;

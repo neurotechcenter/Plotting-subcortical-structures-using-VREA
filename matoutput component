@@ -1,0 +1,4 @@
+  <Component Type=“MatOutput”>
+      <Name>“Create limbic system.mat”</Name>
+      <SurfaceIdentifier>“LimbicSystem”</SurfaceIdentifier>
+  </Component>
